@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-shared -Wall -Werror -fPIC -Iinclude -ldl -fvisibility=hidden
 SRCS=$(wildcard src/*.c)
-OUTPUTFILE=kf2hook.so
+OUTPUTFILE=gshelper.so
 OUTPUTPATH=build
 
 all: bin
