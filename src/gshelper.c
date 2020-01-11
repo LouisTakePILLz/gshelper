@@ -38,6 +38,11 @@ void term_handler(int signum) {
     appRequestExit(0);
 }
 
+void segfault_handler(int signum) {
+    fprintf(stderr, "Caught segfault: %i\n", signum);
+    exit(128 + signum);
+}
+
 int patch_server_commandlet() {
     int ret;
 
@@ -83,6 +88,9 @@ int __libc_start_main(
     sigaction(SIGINT, &action, NULL);
     sigaction(SIGHUP, &action, NULL);
     sigaction(SIGTERM, &action, NULL);
+
+    action.sa_handler = segfault_handler;
+    sigaction(SIGSEGV, &action, NULL);
 
     // Member functions
     LoadSymbol(UServerCommandlet_Main, "_ZN17UServerCommandlet4MainERK7FString", "UServerCommandlet::Main(const FString*)");
