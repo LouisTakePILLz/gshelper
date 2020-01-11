@@ -27,13 +27,13 @@ static int (*UServerCommandlet_Main) (void* this, void* params);
 static void (*appRequestExit) (unsigned int force);
 
 void fail_load_symbol(char* symbol) {
-    printf("Failed locating symbol: %s\n", symbol);
+    fprintf(stderr, "Failed locating symbol: %s\n", symbol);
     exit(1);
 }
 
 void term_handler(int signum) {
-    printf("Caught signal: %i\n", signum);
-    printf("GIsRunning: %u\n", *GIsRunning);
+    fprintf(stderr, "Caught signal: %i\n", signum);
+    fprintf(stderr, "GIsRunning: %u\n", *GIsRunning);
 
     appRequestExit(0);
 }
